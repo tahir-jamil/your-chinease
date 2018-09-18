@@ -1,26 +1,28 @@
-
-<ActionBar title="Home" class="action-bar">
+<ActionBar title="English to Chinese" class="action-bar">
 </ActionBar>
 <GridLayout rows="*" columns="*" class="page">
 	<GridLayout row="1" colSpan="2" tkExampleTitle tkToggleNavButton>
 		<RadListView [items]="languageData">
 			<ng-template tkListItemTemplate let-item="item">
-				<GridLayout rows="auto,*,auto" columns="*,*" style="margin:7;padding:7;" borderRadius="5" backgroundColor="white">
-          <Label row="0" col="0" class="h6  text-left text-muted " >
-						<FormattedString>
-							<Span text="English "></Span>
-							<Span text="&#xe872;" class="mdiBottomBarIcons" ></Span>
-						</FormattedString>
-					</Label>
-          <Label row="0" col="1" class="h6  text-left text-muted "  >
-						<FormattedString>
-							<Span text="Chinese "></Span>
-							<Span text="&#xe872;" class="mdiBottomBarIcons"></Span>
-						</FormattedString>
-					</Label>
-					<Label row="1" col="0" class="body paddingLeft text-center" [text]="item.english" textWrap="true"></Label>
-					<Label row="1" col="1" class="body  paddingLeft text-center" [text]="item.chinese" textWrap="true"></Label>
-					<Image row="2" colSpan="2" width="50%" height="30%" class="imagePadding" src="https://play.nativescript.org/dist/assets/img/NativeScript_logo.png"></Image>
+				<GridLayout class="itemWord" rows="auto,auto">
+
+					<GridLayout rows="auto" columns="*,*"  borderRadius="5" >
+						<Label row="0" col="0" class="wordFormate VarelaRound-Regular text-left">
+							<FormattedString>
+								<Span [text]="item.english"></Span>
+								<Span text="&#xe3a1;" class="mdiBottomBarIcons"></Span>
+							</FormattedString>
+						</Label>
+						<Label row="0" col="1" class="wordFormate VarelaRound-Regular text-right">
+							<FormattedString>
+								<Span [text]="item.chinese"></Span>
+								<Span text="&#xe3a1;" class="mdiBottomBarIcons"></Span>
+							</FormattedString>
+						</Label>
+					</GridLayout>
+					<GridLayout row="1" class="image-size">
+						<Image row="2" colSpan="2" stretch="aspectFill" src=""></Image>
+					</GridLayout>
 				</GridLayout>
 			</ng-template>
 		</RadListView>

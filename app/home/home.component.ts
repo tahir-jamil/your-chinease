@@ -12,10 +12,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
   }
+
   languageData = [
     { english: "chair", chinese: "椅子" },
     { english: "second", chinese: "椅子" },
     { english: "third", chinese: "椅子" },
     { english: "forth", chinese: "椅子" }
-];
+  ];
 }
+

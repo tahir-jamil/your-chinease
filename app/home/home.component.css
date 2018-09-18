@@ -1,9 +1,18 @@
-
-.paddingLeft
-{
-    padding-left: 10;
+.itemWord {
+    margin: 10dp 15dp 10dp 15dp;
+    border-width: 0.7dp;
+    border-color: rgb(65, 65, 65);
+    padding: 12dp;
+    border-radius: 6%;
 }
-.imagePadding
-{
-    margin-top: 15;
+
+.wordFormate {
+    font-size: 15;
+    padding: 5dp 0dp 5dp 0dp;
+    text-transform: capitalize;
+}
+
+.image-size {
+    height: 120dp;
+    margin-bottom: 5dp;
 }
