@@ -16,3 +16,22 @@
     height: 120dp;
     padding:10%;
 }
+
+.f-25 {
+    font-size: 23;
+}
+
+.p-r-5 {
+    padding-right: 5dp;
+}
+
+
+
+
+
+
+.search-bar {
+    background-color: #c5c5c5;
+    padding-left: 14%;
+    padding-right: 14%;
+}

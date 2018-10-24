@@ -1,27 +1,32 @@
 <ActionBar title="English to Chinese" class="action-bar">
+	<ActionItem (tap)="favourite()" backgroundColor="transparent" ios.position="right">
+		<Button  text="&#xf004;"  class="fa-icon f-25" ></Button>
+	</ActionItem>
 </ActionBar>
-<GridLayout rows="*" columns="*" class="page">
+
+<GridLayout rows="auto,*" columns="*">
+	<SearchBar id="searchBar" hint="Search" text="" (clear)="onClear" (submit)="onSubmit" class="search-bar"></SearchBar>
 	<GridLayout row="1" colSpan="2" tkExampleTitle tkToggleNavButton>
 		<RadListView [items]="languageData">
 			<ng-template tkListItemTemplate let-item="item">
-				<GridLayout class="itemWord" rows="auto,auto">
+				<GridLayout class="itemWord" rows="auto,auto" columns="auto,*,auto">
 
-					<GridLayout rows="auto" columns="*,*"  borderRadius="5" >
-						<Label row="0" col="0" class="wordFormate VarelaRound-Regular text-left">
-							<FormattedString>
-								<Span [text]="item.english"></Span>
-								<Span text="&#xe3a1;" class="mdiBottomBarIcons"></Span>
-							</FormattedString>
-						</Label>
-						<Label row="0" col="1" class="wordFormate VarelaRound-Regular text-right">
-							<FormattedString>
-								<Span [text]="item.chinese"></Span>
-								<Span text="&#xe3a1;" class="mdiBottomBarIcons"></Span>
-							</FormattedString>
-						</Label>
+					<GridLayout rows="auto" columns="*,*" borderRadius="5">
+						<GridLayout columns="auto,auto">
+							<Label [text]="item.english" textWrap="true" class="p-r-5"></Label>
+							<Label col="1" text="&#xf028;" (tap)="stateAudioSound()" class="fa-icon f-25" textWrap="true"></Label>
+						</GridLayout>
 					</GridLayout>
-					<GridLayout row="1" class="image-size">
-						<Image row="2" colSpan="2" stretch="aspectFill" src="https://imagenevp.com/wp-content/uploads/revslider/home-june-2016/imagen-logo-square.jpg"></Image>
+
+					<GridLayout rows="auto" columns="*,*" col="2" borderRadius="5">
+						<GridLayout columns="auto,auto" horizontalAlignment="right">
+							<Label [text]="item.chinese" textWrap="true" class=" text-right p-r-5"></Label>
+							<Label col="1" text="&#xf028;" (tap)="stateAudioSound()" class="fa-icon f-25 text-right " textWrap="true"></Label>
+						</GridLayout>
+					</GridLayout>
+
+					<GridLayout row="1" colSpan="3" class="image-size">
+						<Image row="2" stretch="aspectFill" src="https://imagenevp.com/wp-content/uploads/revslider/home-june-2016/imagen-logo-square.jpg"></Image>
 					</GridLayout>
 				</GridLayout>
 			</ng-template>

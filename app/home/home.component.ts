@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { TNSPlayer } from 'nativescript-audio';
 
+import { Component, OnInit } from '@angular/core';
+import { RouterExtensions } from 'nativescript-angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -8,10 +10,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  playerOptions = {
+    audioFile: 'https://www.computerhope.com/jargon/m/example.mp3',
+    loop: false,
+    completeCallback: function () {
+      console.log('finished playing');
+    },
+    errorCallback: function (errorObject) {
+      console.log(JSON.stringify(errorObject));
+    },
+    infoCallback: function (args) {
+      console.log(JSON.stringify(args));
+    }
+  };
 
-  ngOnInit() {
-  }
 
   languageData = [
     { english: "chair", chinese: "椅子" },
@@ -19,5 +31,67 @@ export class HomeComponent implements OnInit {
     { english: "third", chinese: "椅子" },
     { english: "forth", chinese: "椅子" }
   ];
+
+  searchBarheight;
+  
+  constructor(private routerExtensions: RouterExtensions) {
+    this._player = new TNSPlayer();
+  }
+
+  ngOnInit() {
+  }
+
+  dataItems = ['a', 'b', 'v', 'e'];
+  onClear() { }
+  onSubmit() { }
+
+
+
+  private _player: TNSPlayer;
+
+
+
+
+  stateAudioSound() {
+    this._player
+      .playFromUrl(this.playerOptions)
+      .then(function (res) {
+        console.log(res);
+      })
+      .catch(function (err) {
+        console.log('something went wrong...', err);
+      });
+  }
+
+  public togglePlay() {
+    if (this._player.isAudioPlaying()) {
+      this._player.pause();
+    } else {
+      this._player.play();
+    }
+  }
+
+  private _trackComplete(args: any) {
+    console.log('reference back to player:', args.player);
+    // iOS only: flag indicating if completed succesfully
+    console.log('whether song play completed successfully:', args.flag);
+  }
+
+  private _trackError(args: any) {
+    console.log('reference back to player:', args.player);
+    console.log('the error:', args.error);
+    // Android only: extra detail on error
+    console.log('extra info on the error:', args.extra);
+  }
+
+
+  favourite() {
+       this.routerExtensions.navigate(['/favorite'], {
+           transition: {
+           name: 'fade',
+           curve: 'linear'
+           }
+       });
+  }
 }
 

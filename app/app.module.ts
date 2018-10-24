@@ -12,25 +12,26 @@ import { AppComponent } from "./app.component";
 import { HomeComponent } from './home/home.component';
 var application = require("application");
 import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
+import { FavouriteComponent } from './favourite/favourite.component';
 
 @NgModule({
-    bootstrap: [
-        AppComponent
-    ],
-    imports: [
-        NativeScriptModule,
-        AppRoutingModule,
-        NativeScriptUIListViewModule
-    ],
-    declarations: [
-        AppComponent,
-    HomeComponent
-],
-    providers: [
-    ],
-    schemas: [
-        NO_ERRORS_SCHEMA
-    ]
+   bootstrap: [
+      AppComponent
+   ],
+   imports: [
+      NativeScriptModule,
+      AppRoutingModule,
+      NativeScriptUIListViewModule
+   ],
+   declarations: [
+      AppComponent,
+      HomeComponent,
+      FavouriteComponent
+   ],
+   providers: [],
+   schemas: [
+      NO_ERRORS_SCHEMA
+   ]
 })
 /*
 Pass your application module to the bootstrapModule function located in main.ts to start your app
