@@ -1,7 +1,8 @@
-import { TNSPlayer } from 'nativescript-audio';
-
 import { Component, OnInit } from '@angular/core';
+import { TNSPlayer } from 'nativescript-audio';
 import { RouterExtensions } from 'nativescript-angular/router';
+const firebase = require("nativescript-plugin-firebase");
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -37,8 +38,20 @@ export class HomeComponent implements OnInit {
   constructor(private routerExtensions: RouterExtensions) {
     this._player = new TNSPlayer();
   }
+  
 
   ngOnInit() {
+    firebase.init({
+      // Optionally pass in properties for database, authentication and cloud messaging,
+      // see their respective docs.
+    }).then(
+      instance => {
+        console.log("firebase.init done");
+      },
+      error => {
+        console.log(`firebase.init error: ${error}`);
+      }
+    );
   }
 
   dataItems = ['a', 'b', 'v', 'e'];
