@@ -1,33 +1,35 @@
 <ActionBar title="English to Chinese" class="action-bar">
 	<ActionItem (tap)="favourite()" backgroundColor="transparent" ios.position="right">
-		<Button  text="&#xf004;"  class="fa-icon f-25" ></Button>
+		<Button  text="&#xf004;" backgroundColor="transparent" style="border-width:1dp; border-color:transparent;" class="fa-icon f-25" ></Button>
 	</ActionItem>
 </ActionBar>
 
 <GridLayout rows="auto,*" columns="*">
 	<SearchBar id="searchBar" hint="Search" text="" (clear)="onClear" (submit)="onSubmit" class="search-bar"></SearchBar>
 	<GridLayout row="1" colSpan="2" tkExampleTitle tkToggleNavButton>
-		<RadListView [items]="languageData">
+		<RadListView [items]="data">
 			<ng-template tkListItemTemplate let-item="item">
 				<GridLayout class="itemWord" rows="auto,auto" columns="auto,*,auto">
 
 					<GridLayout rows="auto" columns="*,*" borderRadius="5">
-						<GridLayout columns="auto,auto">
+						<GridLayout (tap)="getData()" columns="auto,auto">
 							<Label [text]="item.english" textWrap="true" class="p-r-5"></Label>
-							<Label col="1" text="&#xf028;" (tap)="stateAudioSound()" class="fa-icon f-25" textWrap="true"></Label>
+							<Image src="res://audio" col="1" [height]="imgHeight" [width]="imgWidth" stretch="aspectFit"></Image>
 						</GridLayout>
 					</GridLayout>
 
-					<GridLayout rows="auto" columns="*,*" col="2" borderRadius="5">
-						<GridLayout columns="auto,auto" horizontalAlignment="right">
+					<GridLayout rows="auto" columns="auto,auto" horizontalAlignment="right" col="2" borderRadius="5">
+						<GridLayout (tap)="saveData()" columns="auto,auto" horizontalAlignment="right">
 							<Label [text]="item.chinese" textWrap="true" class=" text-right p-r-5"></Label>
-							<Label col="1" text="&#xf028;" (tap)="stateAudioSound()" class="fa-icon f-25 text-right " textWrap="true"></Label>
+							<Image src="res://audio" col="1" [height]="imgHeight" class="m-t-5" [width]="imgWidth" stretch="aspectFit"></Image>
 						</GridLayout>
 					</GridLayout>
 
 					<GridLayout row="1" colSpan="3" class="image-size">
-						<Image row="2" stretch="aspectFill" src="https://imagenevp.com/wp-content/uploads/revslider/home-june-2016/imagen-logo-square.jpg"></Image>
+						<Image row="2" stretch="aspectFit" [src]="'~/images/' + item.img"></Image>
 					</GridLayout>
+					
+					<Button row="1" col="2" verticalAlignment="bottom" text="&#xf004;" horizontalAlignment="right" [ngClass]= "{'activeFav' : item.fav == true}" (tap)="toggleFav(item)" style="border-width:1dp; border-color:transparent;" class="fa-icon f-25 text-right" ></Button>
 				</GridLayout>
 			</ng-template>
 		</RadListView>

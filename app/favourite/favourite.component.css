@@ -1,0 +1,44 @@
+.itemWord {
+    margin: 10dp 15dp 10dp 10dp;
+    border-width: 0.7dp;
+    border-color: rgb(65, 65, 65);
+    padding: 12dp;
+    border-radius: 6%;
+}
+
+.wordFormate {
+    font-size: 15;
+    padding: 5dp 0dp 5dp 0dp;
+    text-transform: capitalize;
+}
+
+.image-size {
+    height: 120dp;
+    padding:10%;
+}
+
+.f-25 {
+    font-size: 23;
+}
+
+.p-r-5 {
+    padding-right: 5dp;
+}
+
+
+.m-t-5 {
+    margin-top: -5dp;
+}
+
+
+
+.search-bar {
+    background-color: #c5c5c5;
+    padding-left: 14%;
+    padding-right: 14%;
+}
+
+
+.activeFav {
+    color: rgb(209, 46, 25);
+}

@@ -20,7 +20,6 @@ refer to http://docs.nativescript.org/ui/theme.
   font-family: "VarelaRound-Regular";
 }
   
-
 .fa-icon {
-  font-family: "FontAwesome";
+  font-family: "fontAwesome";
 }

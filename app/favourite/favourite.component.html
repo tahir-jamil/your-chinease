@@ -1,5 +1,37 @@
-<GridLayout rows="*" columns="*">
-  <Label text="sdlkjf " textWrap="true"></Label>
-    
+<ActionBar title="English to Chinese" class="action-bar">
+  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="goback()"></NavigationButton>
+</ActionBar>
 
+
+
+<GridLayout rows="*" columns="*">
+  <GridLayout tkExampleTitle tkToggleNavButton>
+    <RadListView  [items]="favData">
+      <ng-template tkListItemTemplate let-item="item">
+        <GridLayout [visibility]="item.fav == true ? 'visible' : 'collapsed'" class="itemWord" rows="auto,auto" columns="auto,*,auto">
+
+          <GridLayout rows="auto" columns="*,*" borderRadius="5">
+            <GridLayout (tap)="getData()" columns="auto,auto">
+              <Label [text]="item.english" textWrap="true" class="p-r-5"></Label>
+              <Image src="res://audio" col="1" [height]="imgHeight" [width]="imgWidth" stretch="aspectFit"></Image>
+            </GridLayout>
+          </GridLayout>
+
+          <GridLayout rows="auto" columns="*,*" col="2" borderRadius="5">
+            <GridLayout (tap)="saveData()" columns="auto,auto" horizontalAlignment="right">
+              <Label [text]="item.chinese" textWrap="true" class=" text-right p-r-5"></Label>
+              <Image src="res://audio" col="1" [height]="imgHeight" class="m-t-5" [width]="imgWidth" stretch="aspectFit"></Image>
+            </GridLayout>
+          </GridLayout>
+
+          <GridLayout row="1" colSpan="3" class="image-size">
+            <Image row="2" stretch="aspectFit" [src]="'~/images/' + item.img"></Image>
+          </GridLayout>
+          
+					<Button row="1" col="2" verticalAlignment="bottom" text="&#xf004;" horizontalAlignment="right" [ngClass]= "{'activeFav' : item.fav == true}" (tap)="toggleFav(item)" style="border-width:1dp; border-color:transparent;" class="fa-icon f-25 text-right" ></Button>
+
+        </GridLayout>
+      </ng-template>
+    </RadListView>
+  </GridLayout>
 </GridLayout>

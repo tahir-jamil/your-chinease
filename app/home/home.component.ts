@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TNSPlayer } from 'nativescript-audio';
 import { RouterExtensions } from 'nativescript-angular/router';
+import { DataService } from '~/data.service';
 const firebase = require("nativescript-plugin-firebase");
+import * as platformModule from 'tns-core-modules/platform';
 
 @Component({
   selector: 'app-home',
@@ -26,24 +28,25 @@ export class HomeComponent implements OnInit {
   };
 
 
-  languageData = [
-    { english: "chair", chinese: "椅子" },
-    { english: "second", chinese: "椅子" },
-    { english: "third", chinese: "椅子" },
-    { english: "forth", chinese: "椅子" }
-  ];
-
+  data;
   searchBarheight;
-  
-  constructor(private routerExtensions: RouterExtensions) {
+  imgHeight;
+  imgWidth;
+
+  constructor(private routerExtensions: RouterExtensions, private dataService: DataService) {
     this._player = new TNSPlayer();
   }
-  
+
 
   ngOnInit() {
     firebase.init({
-      // Optionally pass in properties for database, authentication and cloud messaging,
-      // see their respective docs.
+      persist: true,
+      // onAuthStateChanged: function(data) { // optional but useful to immediately re-logon the user when he re-visits your app
+      //   console.log(data.loggedIn ? "Logged in to firebase" : "Logged out from firebase");
+      //   if (data.loggedIn) {
+      //     console.log("user's email address: " + (data.user.email ? data.user.email : "N/A"));
+      //   }
+      // }
     }).then(
       instance => {
         console.log("firebase.init done");
@@ -51,6 +54,48 @@ export class HomeComponent implements OnInit {
       error => {
         console.log(`firebase.init error: ${error}`);
       }
+    );
+
+    this.data = this.dataService.languageData;
+    let deviceHeight: number = platformModule.screen.mainScreen.heightDIPs;
+    let deviceWidth: number = platformModule.screen.mainScreen.widthDIPs;
+
+    this.imgHeight = deviceHeight * 0.036;
+    this.imgWidth = deviceWidth * 0.06;
+  }
+
+
+  getData() {
+    firebase.getCurrentUser()
+      .then(user => console.log("User uid: " + user.uid))
+      .catch(error => console.log("Trouble in paradise: " + error));
+
+    // firebase.login(
+    //   {
+    //     type: firebase.LoginType.PASSWORD,
+    //     passwordOptions: {
+    //       email: 'neelam@translator.com',
+    //       password: 'neelam123'
+    //     }
+    //   })
+    //   .then(result => JSON.stringify(result))
+    //   .catch(error => console.log(error));
+
+    // firebase.getValue('/words')
+    //   .then(result => {
+    //     console.log(JSON.stringify(result));
+    //   })
+    //   .catch(error => console.log("Error: " + error));
+  }
+
+  saveData() {
+    // to store an array of JSON objects
+    firebase.setValue(
+      '/companies',
+      [
+        { name: 'Telerik', country: 'Bulgaria' },
+        { name: 'Google', country: 'USA' }
+      ]
     );
   }
 
@@ -61,8 +106,6 @@ export class HomeComponent implements OnInit {
 
 
   private _player: TNSPlayer;
-
-
 
 
   stateAudioSound() {
@@ -99,12 +142,18 @@ export class HomeComponent implements OnInit {
 
 
   favourite() {
-       this.routerExtensions.navigate(['/favorite'], {
-           transition: {
-           name: 'fade',
-           curve: 'linear'
-           }
-       });
+    this.routerExtensions.navigate(['/favorite'], {
+      transition: {
+        name: 'fade',
+        curve: 'linear'
+      }
+    });
+  }
+
+
+  toggleFav(item) {
+      item.fav = !item.fav;
   }
 }
+
 

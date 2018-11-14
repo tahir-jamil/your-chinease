@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 var application = require("application");
 import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 import { FavouriteComponent } from './favourite/favourite.component';
+import { DataService } from "./data.service";
 
 @NgModule({
    bootstrap: [
@@ -28,7 +29,7 @@ import { FavouriteComponent } from './favourite/favourite.component';
       HomeComponent,
       FavouriteComponent
    ],
-   providers: [],
+   providers: [DataService],
    schemas: [
       NO_ERRORS_SCHEMA
    ]
