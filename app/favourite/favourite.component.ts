@@ -17,10 +17,10 @@ export class FavouriteComponent implements OnInit {
   constructor(private routerExtensions: RouterExtensions, private userService: DataService) { }
 
   favData;
-  
+
   ngOnInit() {
-   this.favData = this.userService.languageData;
-   let deviceHeight: number = platformModule.screen.mainScreen.heightDIPs;
+    this.favData = this.userService.languageData;
+    let deviceHeight: number = platformModule.screen.mainScreen.heightDIPs;
     let deviceWidth: number = platformModule.screen.mainScreen.widthDIPs;
 
     this.imgHeight = deviceHeight * 0.036;
@@ -33,6 +33,6 @@ export class FavouriteComponent implements OnInit {
 
   toggleFav(item) {
     item.fav = !item.fav;
-}
+  }
 
 }
