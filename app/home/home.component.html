@@ -14,7 +14,7 @@
 					<GridLayout rows="auto" columns="*,*" borderRadius="5">
 						<GridLayout (tap)="getData()" columns="auto,auto">
 							<Label [text]="item.english" textWrap="true" class="p-r-5"></Label>
-							<Image src="res://audio" col="1" [height]="imgHeight" [width]="imgWidth" stretch="aspectFit"></Image>
+							<Image src="res://audio" col="1" (tap)="playAudio()" [height]="imgHeight" [width]="imgWidth" stretch="aspectFit"></Image>
 						</GridLayout>
 					</GridLayout>
 

@@ -4,6 +4,7 @@ import { RouterExtensions } from 'nativescript-angular/router';
 import { DataService } from '~/data.service';
 const firebase = require("nativescript-plugin-firebase");
 import * as platformModule from 'tns-core-modules/platform';
+import * as application from 'tns-core-modules/application';
 
 @Component({
   selector: 'app-home',
@@ -13,28 +14,17 @@ import * as platformModule from 'tns-core-modules/platform';
 })
 export class HomeComponent implements OnInit {
 
-  playerOptions = {
-    audioFile: 'https://www.computerhope.com/jargon/m/example.mp3',
-    loop: false,
-    completeCallback: function () {
-      console.log('finished playing');
-    },
-    errorCallback: function (errorObject) {
-      console.log(JSON.stringify(errorObject));
-    },
-    infoCallback: function (args) {
-      console.log(JSON.stringify(args));
-    }
-  };
+  
 
+  // private _player: TNSPlayer;
 
   data;
   searchBarheight;
   imgHeight;
   imgWidth;
 
-  constructor(private routerExtensions: RouterExtensions, private dataService: DataService) {
-    this._player = new TNSPlayer();
+  constructor(private routerExtensions: RouterExtensions, private dataService: DataService, private player: TNSPlayer) {
+    // this._player = new TNSPlayer();
   }
 
 
@@ -62,6 +52,7 @@ export class HomeComponent implements OnInit {
 
     this.imgHeight = deviceHeight * 0.036;
     this.imgWidth = deviceWidth * 0.06;
+    
   }
 
 
@@ -104,13 +95,36 @@ export class HomeComponent implements OnInit {
   onSubmit() { }
 
 
+  playAudio() {
+    firebase.storage.getDownloadUrl({
+      // optional, can also be passed during init() as 'storageBucket' param so we can cache it
+      bucket: 'gs://dddd-c7570.appspot.com',
+      // the full path of an existing file in your Firebase storage
+      remoteFullPath: 'SampleAudio_0.4mb.mp3'
+    }).then(
+        function (url) {
+          let urlValue : any  = url;
+          console.log("Remote URL: " + urlValue);
+          if (url) {
+            setTimeout(() => {
+              this.stateAudioSound(urlValue);
+            }, 1000);
+          }
+        },
+        function (error) {
+          console.log("Error: " + error);
+        }
+    );
+  }
 
-  private _player: TNSPlayer;
 
 
-  stateAudioSound() {
-    this._player
-      .playFromUrl(this.playerOptions)
+  stateAudioSound(url) {
+    this.player
+      .playFromUrl({
+        audioFile: url,
+        loop: false,
+      })
       .then(function (res) {
         console.log(res);
       })

@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "1041056354956",
-    "firebase_url": "https://translator-13fc2.firebaseio.com",
-    "project_id": "translator-13fc2",
-    "storage_bucket": "translator-13fc2.appspot.com"
+    "project_number": "485521283605",
+    "firebase_url": "https://dddd-c7570.firebaseio.com",
+    "project_id": "dddd-c7570",
+    "storage_bucket": "dddd-c7570.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1041056354956:android:c80a5e257272dd0a",
+        "mobilesdk_app_id": "1:485521283605:android:c80a5e257272dd0a",
         "android_client_info": {
           "package_name": "org.nativescript.englishtochinese"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1041056354956-mj4lqs9uscp15kmoae9j8qun99motohd.apps.googleusercontent.com",
+          "client_id": "485521283605-b5implrlte1r29kss8opdtjacochkli4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCWZ5AjP4GJwAuLrbca-l2d8MKFUBC8YGI"
+          "current_key": "AIzaSyDh-5RGTO8uze0lWed8sRy_7MaM3mXuORY"
         }
       ],
       "services": {
