@@ -1,0 +1,7 @@
+<ActionBar title="Search Word" class="action-bar">
+  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="goback()"></NavigationButton>
+</ActionBar>
+<GridLayout rows="auto,*" columns="">
+    <SearchBar id="searchBar" hint="Search" text="" (clear)="onClear" (submit)="onSubmit" class="search-bar"></SearchBar>
+    
+</GridLayout>

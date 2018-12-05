@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { TNSPlayer } from 'nativescript-audio';
 import { RouterExtensions } from 'nativescript-angular/router';
 import { DataService } from '~/data.service';
 const firebase = require("nativescript-plugin-firebase");
 import * as platformModule from 'tns-core-modules/platform';
 import * as application from 'tns-core-modules/application';
+
+import { TNSPlayer } from 'nativescript-audio';
 
 @Component({
   selector: 'app-home',
@@ -16,15 +17,16 @@ export class HomeComponent implements OnInit {
 
   
 
-  // private _player: TNSPlayer;
+  private _player: TNSPlayer;
 
   data;
   searchBarheight;
   imgHeight;
   imgWidth;
+  urlValue : any;
 
-  constructor(private routerExtensions: RouterExtensions, private dataService: DataService, private player: TNSPlayer) {
-    // this._player = new TNSPlayer();
+  constructor(private routerExtensions: RouterExtensions, private dataService: DataService) {
+
   }
 
 
@@ -52,6 +54,7 @@ export class HomeComponent implements OnInit {
 
     this.imgHeight = deviceHeight * 0.036;
     this.imgWidth = deviceWidth * 0.06;
+    this._player = new TNSPlayer();
     
   }
 
@@ -103,26 +106,28 @@ export class HomeComponent implements OnInit {
       remoteFullPath: 'SampleAudio_0.4mb.mp3'
     }).then(
         function (url) {
-          let urlValue : any  = url;
-          console.log("Remote URL: " + urlValue);
-          if (url) {
-            setTimeout(() => {
-              this.stateAudioSound(urlValue);
-            }, 1000);
-          }
+          this.urlValue  = url;
+          console.log("Remote URL: " + this.urlValue);
         },
         function (error) {
           console.log("Error: " + error);
         }
     );
+    if (this.urlValue) { 
+      this.stateAudioSound(this.urlValue)
+    }
   }
 
 
+  stateAudioSound(urlValue) {
+    this._player = new TNSPlayer();
 
-  stateAudioSound(url) {
-    this.player
+    if (this._player) {
+      console.log("------------------ defined");
+      
+      this._player
       .playFromUrl({
-        audioFile: url,
+        audioFile: urlValue,
         loop: false,
       })
       .then(function (res) {
@@ -131,6 +136,9 @@ export class HomeComponent implements OnInit {
       .catch(function (err) {
         console.log('something went wrong...', err);
       });
+    } else {
+       console.log("------------------ not defined");
+    }
   }
 
   public togglePlay() {
@@ -167,6 +175,15 @@ export class HomeComponent implements OnInit {
 
   toggleFav(item) {
       item.fav = !item.fav;
+  }
+
+  search() {
+    this.routerExtensions.navigate(['/search'], {
+      transition: {
+        name: 'fade',
+        curve: 'linear'
+      }
+    });
   }
 }
 
