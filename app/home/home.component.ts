@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
   searchBarheight;
   imgHeight;
   imgWidth;
-  urlValue : any;
+  audioUrlValue : any;
 
   constructor(private routerExtensions: RouterExtensions, private dataService: DataService) {
 
@@ -104,22 +104,21 @@ export class HomeComponent implements OnInit {
       bucket: 'gs://dddd-c7570.appspot.com',
       // the full path of an existing file in your Firebase storage
       remoteFullPath: 'SampleAudio_0.4mb.mp3'
-    }).then(
-        function (url) {
-          this.urlValue  = url;
-          console.log("Remote URL: " + this.urlValue);
+    }).then((url) => {
+          this.audioUrlValue  = url;
+          console.log("Remote URL: " + this.audioUrlValue);
+          if (this.audioUrlValue) { 
+            this.stateAudioSound(this.audioUrlValue)
+          }
         },
-        function (error) {
+        (error) => {
           console.log("Error: " + error);
         }
     );
-    if (this.urlValue) { 
-      this.stateAudioSound(this.urlValue)
-    }
   }
 
 
-  stateAudioSound(urlValue) {
+  stateAudioSound(audioUrlValue) {
     this._player = new TNSPlayer();
 
     if (this._player) {
@@ -127,7 +126,7 @@ export class HomeComponent implements OnInit {
       
       this._player
       .playFromUrl({
-        audioFile: urlValue,
+        audioFile: audioUrlValue,
         loop: false,
       })
       .then(function (res) {

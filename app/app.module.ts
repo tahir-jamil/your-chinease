@@ -14,7 +14,8 @@ var application = require("application");
 import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 import { FavouriteComponent } from './favourite/favourite.component';
 import { DataService } from "./data.service";
-import { SearchComponent } from './search/search.component';
+import { SearchComponent } from "./search/search.component";
+
 
 @NgModule({
    bootstrap: [
