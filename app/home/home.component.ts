@@ -98,12 +98,12 @@ export class HomeComponent implements OnInit {
   onSubmit() { }
 
 
-  playAudio() {
+  playAudio(audioPath) {
     firebase.storage.getDownloadUrl({
       // optional, can also be passed during init() as 'storageBucket' param so we can cache it
       bucket: 'gs://dddd-c7570.appspot.com',
       // the full path of an existing file in your Firebase storage
-      remoteFullPath: 'SampleAudio_0.4mb.mp3'
+      remoteFullPath: audioPath
     }).then((url) => {
           this.audioUrlValue  = url;
           console.log("Remote URL: " + this.audioUrlValue);
@@ -122,14 +122,15 @@ export class HomeComponent implements OnInit {
     this._player = new TNSPlayer();
 
     if (this._player) {
-      console.log("------------------ defined");
+      console.log("------------------ defined"+ "this is the url"+ audioUrlValue);
       
       this._player
       .playFromUrl({
-        audioFile: audioUrlValue,
+        audioFile:audioUrlValue,
         loop: false,
       })
       .then(function (res) {
+        console.log("working audio complete");
         console.log(res);
       })
       .catch(function (err) {
