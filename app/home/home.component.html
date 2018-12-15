@@ -15,14 +15,14 @@
 
 					<GridLayout rows="auto" columns="*,*" borderRadius="5">
 						<GridLayout  columns="auto,auto">
-							<Label [text]="item.english" textWrap="true" class="p-r-5"></Label>
-							<Image src="res://audio" col="1" (tap)="playAudio(item.englishAudio)" [height]="imgHeight" [width]="imgWidth" stretch="aspectFit"></Image>
+							<Label [text]="item.english" backgroundColor="red" textWrap="true" class="p-r-5"></Label>
+							<Image src="res://audio" col="1" (tap)="playAudio(item.englishAudio)" horizontalAlignment="left" [height]="imgHeight" [width]="imgWidth" stretch="aspectFit"></Image>
 						</GridLayout>
 					</GridLayout>
 
 					<GridLayout rows="auto" columns="auto,auto" horizontalAlignment="right" col="2" borderRadius="5">
 						<GridLayout columns="auto,auto" horizontalAlignment="right">
-							<Label [text]="item.chinese" textWrap="true" class=" text-right p-r-5"></Label>
+							<Label [text]="item.chinese"  textWrap="true" class=" text-right p-r-5"></Label>
 							<Image src="res://audio" col="1" (tap)="playAudio(item.chineseAudio)" [height]="imgHeight" class="m-t-5" [width]="imgWidth" stretch="aspectFit"></Image>
 						</GridLayout>
 					</GridLayout>

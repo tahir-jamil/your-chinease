@@ -129,11 +129,10 @@ export class HomeComponent implements OnInit {
         audioFile:audioUrlValue,
         loop: false,
       })
-      .then(function (res) {
+      .then(() =>  {
         console.log("working audio complete");
-        console.log(res);
       })
-      .catch(function (err) {
+      .catch((err)  => {
         console.log('something went wrong...', err);
       });
     } else {
