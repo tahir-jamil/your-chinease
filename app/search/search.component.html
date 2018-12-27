@@ -2,33 +2,34 @@
   <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="goback()"></NavigationButton>
 </ActionBar>
 <GridLayout rows="auto,*" columns="">
-    <SearchBar id="searchBar" hint="Search" text=""  (textChange)="onTextChanged($event)" (submit)="onSubmit($event)" class="search-bar"></SearchBar>
+    <SearchBar id="searchBar" hint="Search" text="" (submit)="onSubmit($event)" class="search-bar"></SearchBar>
     
     <GridLayout row="1" colSpan="2" tkExampleTitle tkToggleNavButton>
       <RadListView [items]="searchData">
         <ng-template tkListItemTemplate let-item="item">
           <GridLayout class="itemWord" rows="auto,auto" columns="auto,*,auto">
   
-            <GridLayout rows="auto" columns="*,*" borderRadius="5">
+            <GridLayout [visibility]="!item.word ? 'visible' : 'collapsed'" rows="auto" columns="*,*" borderRadius="5">
               <GridLayout (tap)="getData()" columns="auto,auto">
                 <Label [text]="item.english" textWrap="true" class="p-r-5"></Label>
                 <Image src="res://audio" col="1" (tap)="playAudio()" [height]="imgHeight" [width]="imgWidth" stretch="aspectFit"></Image>
               </GridLayout>
             </GridLayout>
   
-            <GridLayout rows="auto" columns="auto,auto" horizontalAlignment="right" col="2" borderRadius="5">
+            <GridLayout [visibility]="!item.word ? 'visible' : 'collapsed'" rows="auto" columns="auto,auto" horizontalAlignment="right" col="2" borderRadius="5">
               <GridLayout (tap)="saveData()" columns="auto,auto" horizontalAlignment="right">
                 <Label [text]="item.chinese" textWrap="true" class=" text-right p-r-5"></Label>
                 <Image src="res://audio" col="1" [height]="imgHeight" class="m-t-5" [width]="imgWidth" stretch="aspectFit"></Image>
               </GridLayout>
             </GridLayout>
-            
   
-            <GridLayout row="1" colSpan="3" class="image-size">
+            <GridLayout [visibility]="!item.word ? 'visible' : 'collapsed'" row="1" colSpan="3" class="image-size">
               <Image row="2" stretch="aspectFit" [src]="'~/images/' + item.img"></Image>
             </GridLayout>
             
-            <Button row="1" col="2" verticalAlignment="bottom" text="&#xf004;" horizontalAlignment="right" [ngClass]= "{'activeFav' : item.fav == true}" (tap)="toggleFav(item)" style="border-width:1dp; border-color:transparent;" class="fa-icon f-25 text-right" ></Button>
+            <Button row="1" col="2" [visibility]="!item.word ? 'visible' : 'collapsed'" verticalAlignment="bottom" text="&#xf004;" horizontalAlignment="right" [ngClass]= "{'activeFav' : item.fav == true}" (tap)="toggleFav(item)" style="border-width:1dp; border-color:transparent;" class="fa-icon f-25 text-right" ></Button>
+            <Image src="res://noresult" stretch="aspectFit" [visibility]="item.word ? 'visible' : 'collapsed'"></Image>
+            
           </GridLayout>
         </ng-template>
       </RadListView>

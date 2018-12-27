@@ -12,7 +12,7 @@ import * as platformModule from 'tns-core-modules/platform';
 })
 export class SearchComponent implements OnInit {
 
-  public searchPhrase;
+  public searchPhrase = {};
   searchData = [];
   imgHeight: number;
   imgWidth: number;
@@ -31,27 +31,23 @@ export class SearchComponent implements OnInit {
     this.routerExtensions.back();
   }
 
-
   public onSubmit(args) {
+    this.searchData = [];
+    this.searchPhrase = {};
     let searchBar = <SearchBar>args.object;
-
-    this.searchPhrase = this.dataService.languageData.filter(function (item) {
-      return item.english == searchBar.text;
-    })[0];
-
-    this.searchData.push(this.searchPhrase);
-  }
-
-  public onTextChanged(args) {
-    this.searchData = []
-    let searchBar = <SearchBar>args.object;
-    console.log("SearchBar text changed! New value: " + searchBar.text);
-    this.searchPhrase = this.dataService.languageData.filter((item)  => {
-      if (item.english.includes(searchBar.text) == true ) {
-        this.searchData.push(item);
+    this.searchPhrase = this.dataService.languageData.filter(item => {
+      if (item.english.toLowerCase() == searchBar.text.toLowerCase()) {
+        return item;
       }
-    });
+    })
+
+    if (this.searchPhrase[0]) {
+      this.searchData.push(this.searchPhrase[0]);
+    } else {
+      this.searchData.push({word:true});
+    }
   }
+
 
   toggleFav(item) {
     item.fav = !item.fav;
