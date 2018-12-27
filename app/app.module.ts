@@ -15,7 +15,7 @@ import { NativeScriptUIListViewModule } from "nativescript-ui-listview/angular";
 import { FavouriteComponent } from './favourite/favourite.component';
 import { DataService } from "./data.service";
 import { SearchComponent } from "./search/search.component";
-
+import "nativescript-localstorage";
 
 @NgModule({
    bootstrap: [

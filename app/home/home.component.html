@@ -15,7 +15,7 @@
 
 					<GridLayout rows="auto" columns="*,*" borderRadius="5">
 						<GridLayout  columns="auto,auto">
-							<Label [text]="item.english" backgroundColor="red" textWrap="true" class="p-r-5"></Label>
+							<Label [text]="item.english" textWrap="true" class="p-r-5"></Label>
 							<Image src="res://audio" col="1" (tap)="playAudio(item.englishAudio)" horizontalAlignment="left" [height]="imgHeight" [width]="imgWidth" stretch="aspectFit"></Image>
 						</GridLayout>
 					</GridLayout>

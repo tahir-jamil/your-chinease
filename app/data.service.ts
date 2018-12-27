@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
 @Injectable()
 export class DataService {
-
+    
     languageData = [
         { english: "Apple", chinese: "苹果", img: "apple.jpg", fav: false , englishAudio:"apple.mp3",chineseAudio:"apple female.mp3"},
         { english: "Butterfly", chinese: "蝴蝶", img: "butterfly.jpg", fav: false , englishAudio:"butterfly.mp3",chineseAudio:"butterfly female.mp3"},
@@ -29,12 +29,21 @@ export class DataService {
         { english: "Watermelon", chinese: "西瓜", img: "watermelon.jpg", fav: false , englishAudio:"watermelon.mp3",chineseAudio:"watermelon female.mp3"},
         { english: "X-Ray", chinese: "x射线", img: "x-ray.jpg", fav: false , englishAudio:"x-ray.mp3",chineseAudio:"x-ray female.mp3"},
         { english: "Yawn", chinese: "打哈欠", img: "ywan.jpg", fav: false , englishAudio:"yawn.mp3",chineseAudio:"yawn female.mp3"},
-        { english: "Zoo", chinese: "动物园", img: "zoo.jpg", fav: false , englishAudio:"zoo.mp3",chineseAudio:"zoo female.mp3"}
-
+        { english: "Zoo", chinese: "动物园", img: "zoo.jpg", fav: false , englishAudio:"zoo.mp3",chineseAudio:"zoo female.mp3"} 
     ];
-
+    
     constructor() { }
+
+    firstTime(): void {
+        console.log("the data is set into the local storage once")
+        localStorage.setItem('wordArray', JSON.stringify(this.languageData)); // save updated array back to localstorage
+    }
+    
+    getWords() {
+        console.log("get data from local storage")
+        return JSON.parse(localStorage.getItem('wordArray')) || []; 
+    }
 }
 
 
-// icre cream english
+// icre cream englishÇ
